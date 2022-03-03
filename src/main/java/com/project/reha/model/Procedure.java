@@ -1,11 +1,14 @@
 package com.project.reha.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
-@Table(name = "PROCEDURE")
+@Setter
+@Getter
+@Table(name = "PROCEDURE_TABLE")
 public class Procedure extends AbstractPO {
 
     @Column(name = "NAME")

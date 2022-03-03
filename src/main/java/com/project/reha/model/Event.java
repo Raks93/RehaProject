@@ -1,13 +1,16 @@
 package com.project.reha.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "EVENT")
+@Setter
+@Getter
+@Table(name = "EVENT_TABLE")
 public class Event extends AbstractPO {
 
     @Column(name = "NAME")
@@ -18,4 +21,7 @@ public class Event extends AbstractPO {
 
     @Column(name = "DOCTOR")
     private String comment;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Patient patient;
 }

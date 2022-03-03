@@ -1,12 +1,15 @@
 package com.project.reha.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "PRESCRIPTION")
+@Table(name = "PRESCRIPTION_TABLE")
 public class Prescription extends AbstractPO {
 
     @Column(name = "TYPE")
@@ -23,4 +26,7 @@ public class Prescription extends AbstractPO {
 
     @Column(name = "DOSE")
     private String dose;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Patient patient;
 }
