@@ -1,5 +1,6 @@
 package com.project.reha.model;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,12 +19,15 @@ import java.time.LocalDateTime;
 @Table(name = "EVENT_TABLE")
 public class Event extends AbstractPO {
 
+    @NotNull
     @Column(name = "NAME")
     private LocalDateTime dateTime;
 
+    @NotNull
     @Column(name = "STATUS")
     private String status;
 
+    @NotNull
     @Column(name = "DOCTOR")
     private String comment;
 

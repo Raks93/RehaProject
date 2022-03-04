@@ -1,5 +1,6 @@
 package com.project.reha.model;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,15 +23,19 @@ import java.util.List;
 @Table(name = "PRESCRIPTION_TABLE")
 public class Prescription extends AbstractPO {
 
+    @NotNull
     @Column(name = "TIME_PATTERN")
     private String timePattern;
 
+    @NotNull
     @Column(name = "START_DATE")
     private LocalDateTime startDate;
 
+    @NotNull
     @Column(name = "END_DATE")
     private LocalDateTime endDate;
 
+    @NotNull
     @Column(name = "DOSE")
     private String dose;
 
