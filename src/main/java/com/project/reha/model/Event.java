@@ -1,11 +1,14 @@
 package com.project.reha.model;
 
+import com.project.reha.enums.EventStatus;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,8 +27,9 @@ public class Event extends AbstractPO {
     private LocalDateTime dateTime;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
-    private String status;
+    private EventStatus status;
 
     @NotNull
     @Column(name = "DOCTOR")
