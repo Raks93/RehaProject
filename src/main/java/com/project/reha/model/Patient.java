@@ -2,7 +2,9 @@ package com.project.reha.model;
 
 import com.project.reha.enums.PatientStatus;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.CascadeType;
@@ -14,12 +16,23 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "PATIENT_TABLE")
 public class Patient extends AbstractPO {
+
+    public Patient(String name, String diagnosis, String insuranceNumber, String doctor, PatientStatus status) {
+        this.name = name;
+        this.diagnosis = diagnosis;
+        this.insuranceNumber = insuranceNumber;
+        this.doctor = doctor;
+        this.status = status;
+    }
 
     @NotNull
     @Column(name = "NAME")
@@ -68,5 +81,16 @@ public class Patient extends AbstractPO {
         event.setPatient(null);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Patient patient = (Patient) o;
+        return Objects.equals(name, patient.name) && Objects.equals(insuranceNumber, patient.insuranceNumber);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, insuranceNumber);
+    }
 }
