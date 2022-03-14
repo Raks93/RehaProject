@@ -32,7 +32,7 @@ public class Event extends AbstractPO {
     private EventStatus status;
 
     @NotNull
-    @Column(name = "DOCTOR")
+    @Column(name = "COMMENT")
     private String comment;
 
     @ManyToOne(fetch = FetchType.LAZY)
