@@ -26,14 +26,6 @@ import java.util.Objects;
 @Table(name = "PATIENT_TABLE")
 public class Patient extends AbstractPO {
 
-    public Patient(String name, String diagnosis, String insuranceNumber, String doctor, PatientStatus status) {
-        this.name = name;
-        this.diagnosis = diagnosis;
-        this.insuranceNumber = insuranceNumber;
-        this.doctor = doctor;
-        this.status = status;
-    }
-
     @NotNull
     @Column(name = "NAME")
     private String name;
@@ -92,5 +84,22 @@ public class Patient extends AbstractPO {
     @Override
     public int hashCode() {
         return Objects.hash(name, insuranceNumber);
+    }
+
+    public Patient(String name, String diagnosis, String insuranceNumber, String doctor, PatientStatus status) {
+        this.name = name;
+        this.diagnosis = diagnosis;
+        this.insuranceNumber = insuranceNumber;
+        this.doctor = doctor;
+        this.status = status;
+    }
+
+    public Patient(Long id, String name, String diagnosis, String insuranceNumber, String doctor, PatientStatus status) {
+        super(id);
+        this.name = name;
+        this.diagnosis = diagnosis;
+        this.insuranceNumber = insuranceNumber;
+        this.doctor = doctor;
+        this.status = status;
     }
 }

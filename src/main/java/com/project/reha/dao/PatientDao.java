@@ -8,4 +8,7 @@ import java.util.Optional;
 public interface PatientDao extends JpaRepository<Patient, Long> {
 
     Optional<Patient> findPatientByNameAndInsuranceNumber(String name, String insuranceNumber);
+
+    Optional<Patient> findFirstByOrderByNameAsc();
+
 }
