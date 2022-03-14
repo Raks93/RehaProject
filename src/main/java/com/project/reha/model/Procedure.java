@@ -1,7 +1,6 @@
 package com.project.reha.model;
 
 import com.project.reha.enums.ProcedureType;
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,13 +20,11 @@ import java.util.List;
 @Table(name = "PROCEDURE_TABLE")
 public class Procedure extends AbstractPO {
 
-    @NotNull
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "TYPE")
+    @Column(name = "TYPE", nullable = false)
     private ProcedureType type;
 
     @OneToMany(mappedBy = "procedure", cascade = CascadeType.ALL, orphanRemoval = true)
