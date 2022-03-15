@@ -2,13 +2,15 @@ package com.project.reha.service;
 
 import com.project.reha.dao.PatientDao;
 import com.project.reha.dto.PatientDto;
-import com.project.reha.util.mappers.PatientMapper;
 import com.project.reha.model.Patient;
+import com.project.reha.util.mappers.PatientMapper;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.PropertyValueException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,5 +45,14 @@ public class PatientService {
 
     public Optional<Patient> findFirstParentOrderByName() {
         return patientDao.findFirstByOrderByNameAsc();
+    }
+
+    public List<PatientDto> getAllPatients() {
+        List<PatientDto> patientDtoList = new ArrayList<>();
+        List<Patient> patients = patientDao.findAll();
+        for (Patient patient : patients) {
+            patientDtoList.add(PatientMapper.mapPatientToPatientDto(patient));
+        }
+        return patientDtoList;
     }
 }
