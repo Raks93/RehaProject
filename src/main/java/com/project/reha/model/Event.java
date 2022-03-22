@@ -1,7 +1,6 @@
 package com.project.reha.model;
 
 import com.project.reha.enums.EventStatus;
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,16 +21,16 @@ import java.time.LocalDateTime;
 @Table(name = "EVENT_TABLE")
 public class Event extends AbstractPO {
 
-    @NotNull
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
+    private String name;
+
+    @Column(name = "DATE", nullable = false)
     private LocalDateTime dateTime;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "STATUS")
+    @Column(name = "STATUS", nullable = false)
     private EventStatus status;
 
-    @NotNull
     @Column(name = "COMMENT")
     private String comment;
 

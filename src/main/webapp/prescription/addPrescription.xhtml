@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition template="../template/templLayout.xhtml">
+        <ui:define name="content">
+            <h1>Enter Prescription</h1>
+            <h:form>
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Times:"/>
+                    <h:inputText id="times" value="#{prescriptionService.prescriptionDto.times}" required="true" />
+                    <h:message for="times"/>
+
+                    <h:outputLabel value="Period:"/>
+                    <h:selectOneMenu id="period" value = "#{prescriptionService.prescriptionDto.period}" required="true" >
+                        <f:selectItem itemValue = "Day" itemLabel = "Day" />
+                        <f:selectItem itemValue = "Week" itemLabel = "Week" />
+                    </h:selectOneMenu>
+                    <h:message for="period"/>
+
+                    <p:outputLabel value="Start"/>
+                    <p:datePicker id="start" value="#{prescriptionService.prescriptionDto.startDate}" showTime="false"
+                                  pattern="yyyy-MM-dd"/>
+                    <h:message for="start"/>
+
+                    <p:outputLabel value="Finish"/>
+                    <p:datePicker id="finish" value="#{prescriptionService.prescriptionDto.endDate}" showTime="false"
+                                  pattern="yyyy-MM-dd"/>
+                    <h:message for="finish"/>
+
+                    <p:outputLabel value="Procedure"/>
+                    <h:selectOneMenu id="procedureSelect" value="#{prescriptionService.procedureDto.id}" converter="javax.faces.Long">
+                        <f:selectItems value="#{procedureService.allProcedures}" var="p" itemValue="#{p.id}"
+                                       itemLabel="#{p.name}:#{p.type}" />
+                    </h:selectOneMenu>
+                    <h:message for="procedureSelect"/>
+
+                    <h:outputLabel value="Dose:" rendered="#{p.type=='Medicine'}"/>
+                    <h:inputText id="dose" value="${prescriptionService.prescriptionDto.dose}" rendered="#{p.type=='Medicine'}"/>
+                    <h:message for="dose"/>
+
+                    <h:commandButton id="idButton" value="save Prescription"
+                                     action="#{prescriptionService.savePrescription()}" />
+
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

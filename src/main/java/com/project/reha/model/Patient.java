@@ -1,7 +1,6 @@
 package com.project.reha.model;
 
 import com.project.reha.enums.PatientStatus;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,25 +25,20 @@ import java.util.Objects;
 @Table(name = "PATIENT_TABLE")
 public class Patient extends AbstractPO {
 
-    @NotNull
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @NotNull
-    @Column(name = "DIAGNOSIS")
+    @Column(name = "DIAGNOSIS", nullable = false)
     private String diagnosis;
 
-    @NotNull
-    @Column(name = "INSURANCE_NUMBER")
+    @Column(name = "INSURANCE_NUMBER", nullable = false)
     private String insuranceNumber;
 
-    @NotNull
-    @Column(name = "DOCTOR")
+    @Column(name = "DOCTOR", nullable = false)
     private String doctor;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "STATUS")
+    @Column(name = "STATUS", nullable = false)
     private PatientStatus status;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -86,7 +80,7 @@ public class Patient extends AbstractPO {
         return Objects.hash(name, insuranceNumber);
     }
 
-    public Patient(String name, String diagnosis, String insuranceNumber, String doctor, PatientStatus status) {
+    public Patient(Long id, String name, String diagnosis, String insuranceNumber, String doctor, PatientStatus status) {
         this.name = name;
         this.diagnosis = diagnosis;
         this.insuranceNumber = insuranceNumber;
@@ -94,12 +88,13 @@ public class Patient extends AbstractPO {
         this.status = status;
     }
 
-    public Patient(Long id, String name, String diagnosis, String insuranceNumber, String doctor, PatientStatus status) {
+    public Patient(Long id, String name, String diagnosis, String insuranceNumber, String doctor, PatientStatus status, List<Prescription> prescriptions) {
         super(id);
         this.name = name;
         this.diagnosis = diagnosis;
         this.insuranceNumber = insuranceNumber;
         this.doctor = doctor;
         this.status = status;
+        this.prescriptions = prescriptions;
     }
 }
