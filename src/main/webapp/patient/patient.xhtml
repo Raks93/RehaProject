@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+    <ui:composition template="../template/templLayout.xhtml">
+        <ui:define name="content">
+            <h1>Patient</h1>
+            <h:form>
+                <h:panelGrid columns="3">
+                        <h:outputLabel value="Name:"/>
+                        <h:inputText id="name" value="#{patientService.patientDto.name}" required="true" />
+                        <h:message for="name"/>
+
+                        <h:outputLabel value="Diagnosis:"/>
+                        <h:inputText id="diagnosis" value="#{patientService.patientDto.diagnosis}" required="true" />
+                        <h:message for="diagnosis"/>
+
+                        <h:outputLabel value="Insurance number:"/>
+                        <h:inputText id="insuranceNumber" value="#{patientService.patientDto.insuranceNumber}" required="true" />
+                        <h:message for="insuranceNumber"/>
+
+                        <h:outputLabel value="Doctor:"/>
+                        <h:inputText id="doctor" value="#{patientService.patientDto.doctor}" required="true" />
+                        <h:message for="doctor"/>
+
+                        <h:outputLabel value="Status:"/>
+                        <h:selectOneMenu  id="status" value = "#{patientService.patientDto.status}" required="true" >
+                            <f:selectItem itemValue = "Treating" itemLabel = "Treating" />
+                            <f:selectItem itemValue = "Discharging" itemLabel = "Discharging" />
+                        </h:selectOneMenu>
+                        <h:message for="status"/>
+
+                    <h:commandButton value="Prescription"
+                                     action="#{prescriptionService.getAllPrescription(patientService.patientDto)}" />
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

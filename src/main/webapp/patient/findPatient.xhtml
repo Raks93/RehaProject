@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+    <ui:composition template="../template/templLayout.xhtml">
+        <ui:define name="content">
+            <h1>Enter Patient</h1>
+            <h:form>
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Name:"/>
+                    <h:inputText id="name" value="#{patientService.patientDto.name}" required="true" />
+                    <h:message for="name"/>
+
+                    <h:outputLabel value="Insurance number:"/>
+                    <h:inputText id="insuranceNumber" value="#{patientService.patientDto.insuranceNumber}" required="true" />
+                    <h:message for="insuranceNumber"/>
+
+                    <h:commandButton value="Find"
+                                     action="#{patientService.find(patientService.patientDto.name, patientService.patientDto.insuranceNumber)}" />
+
+                </h:panelGrid>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

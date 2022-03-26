@@ -1,6 +1,5 @@
 package com.project.reha.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +12,7 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,19 +22,15 @@ import java.util.List;
 @Table(name = "PRESCRIPTION_TABLE")
 public class Prescription extends AbstractPO {
 
-    @NotNull
-    @Column(name = "TIME_PATTERN")
+    @Column(name = "TIME_PATTERN", nullable = false)
     private String timePattern;
 
-    @NotNull
-    @Column(name = "START_DATE")
-    private LocalDateTime startDate;
+    @Column(name = "START_DATE", nullable = false)
+    private LocalDate startDate;
 
-    @NotNull
-    @Column(name = "END_DATE")
-    private LocalDateTime endDate;
+    @Column(name = "END_DATE", nullable = false)
+    private LocalDate endDate;
 
-    @NotNull
     @Column(name = "DOSE")
     private String dose;
 
@@ -46,6 +41,7 @@ public class Prescription extends AbstractPO {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
             @JoinColumn(name="PROCEDURE_ID", referencedColumnName="ID"),
+            @JoinColumn(name="PROCEDURE_NAME", referencedColumnName="NAME"),
             @JoinColumn(name="PROCEDURE_TYPE", referencedColumnName="TYPE")
     })
     private Procedure procedure;
@@ -61,5 +57,26 @@ public class Prescription extends AbstractPO {
     public void removeEvent(Event event) {
         this.events.remove(event);
         event.setPrescription(null);
+    }
+
+    public Prescription(Long id, String timePattern, LocalDate startDate, LocalDate endDate, String dose, Patient patient, Procedure procedure) {
+        super(id);
+        this.timePattern = timePattern;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.dose = dose;
+        this.patient = patient;
+        this.procedure = procedure;
+    }
+
+    public Prescription(Long id, String timePattern, LocalDate startDate, LocalDate endDate, String dose) {
+        super(id);
+        this.timePattern = timePattern;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.dose = dose;
+    }
+
+    public Prescription() {
     }
 }

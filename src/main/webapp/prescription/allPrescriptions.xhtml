@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+    <ui:composition template="../template/templLayout.xhtml">
+        <ui:define name="content">
+
+            <h1>List of Prescription</h1>
+
+            <h:dataTable value="#{prescriptionService.patientDto.prescriptionDtoList}" var="prescription">
+                <h:column>
+                    <f:facet name="header" > Times</f:facet>
+                    #{prescription.times}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Period</f:facet>
+                    #{prescription.period}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Start date</f:facet>
+                    <h:outputText value="#{prescription.startDate.toString()}">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> End date</f:facet>
+                    <h:outputText value="#{prescription.endDate.toString()}">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Name procedure</f:facet>
+                    #{prescription.nameProcedure}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Type procedure</f:facet>
+                    #{prescription.typeProcedure}
+                </h:column>
+                <h:column rendered="#{prescription.typeProcedure}=='Medicine'">
+                    <f:facet name="header"> Dose</f:facet>
+                    #{prescription.dose}
+                </h:column>
+            </h:dataTable>
+            <h:form>
+                <h:commandButton value="add Prescription"
+                                 action="#{prescriptionService.addPrescription(patientService.patientDto)}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

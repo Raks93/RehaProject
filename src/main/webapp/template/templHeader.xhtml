@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+<ui:composition>
+
+    <h:form>
+        <h:link value="All patinents" outcome="/patient/allPatients.xhtml" style="margin-right: 50px;"/>
+        <h:commandLink action="#{patientService.addPatient}" value="Add patinent" style="margin-right: 50px;"/>
+        <h:link value="Find patinent" outcome="/patient/findPatient.xhtml" style="margin-right: 50px;"/>
+        <h:link value="All procedures" outcome="/procedure/allProcedures.xhtml" style="margin-right: 50px;"/>
+        <h:commandLink action="#{procedureService.addProcedure()}" value="Add procedure" style="margin-right: 50px;"/>
+    </h:form>
+</ui:composition>
+</body>
+</html>
